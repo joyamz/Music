@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link
+     rel="stylesheet" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" 
+     integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" 
+     crossorigin="anonymous" 
+     referrerpolicy="no-referrer" />
+    <title>Hello, world!</title>
+
+    <style>
+        body{
+            background-color: rgb(19, 1, 1);
+        }
+        a:link,a:hover{
+            text-decoration: none;
+            color: white;
+        }
+        a{
+            color: white;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: larger;
+        }
+       
+    </style>
+  </head>
+  <body>
+    
+    <nav style="background-color: #0a0000;" class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a style="font-size: 40px; margin: 0px 90px 0px 50px;" class="navbar-brand" href="#"><span style="color: rgb(139, 51, 211);">Mu</span>sica</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a style="font-size: 19px;" class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              
+              <li class="nav-item">
+                <a style="font-size: 19px;" class="nav-link active" aria-current="page" href="#">Playlist</a>
+              </li>
+              
+            </ul>
+            
+              <!-- <button style="font-size: 20px;"
+               class="btn btn-outline-success" type="submit">
+               <a href="http://127.0.0.1:5500/index.html"> Logout </a></button> -->
+               <button style="font-size: 20px;" onclick="logout()" class="btn btn-outline-success">Logout</button>
+
+           
+          </div>
+        </div>
+      </nav>
+
+
+      <!-- Music player -->
+
+      <center >
+        <div class = "music_container" style="margin-top: 20px; justify-content: center;">
+            <h2 id = "title">Better</h2>
+            <h3  id = "artist">Khalid</h3>
+            <div class = "img_container">
+            <img src="Khalid-Better-artwork.jpg" alt="">
+            </div>
+            <audio src="Khalid_Better.mp3"></audio>
+
+            
+            <!-- --controls-- -->
+
+            <div class="music_controls">
+                <i class="fas fa-backward" id= "prev" title="Previous"></i>
+                <i class="fas fa-play main_button" id= "play" title="Play"></i>
+                <i class="fas fa-forward" id= "next" title="Next"></i>
+            </div>
+        </div>
+    </center>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    
+    
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+    
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyBVp65mRh6Ok9g054FN15V-CqSK9ugz-zk",
+        authDomain: "musica-af61c.firebaseapp.com",
+        databaseURL: "https://musica-af61c-default-rtdb.firebaseio.com",
+        projectId: "musica-af61c",
+        storageBucket: "musica-af61c.appspot.com",
+        messagingSenderId: "277334092613",
+        appId: "1:277334092613:web:5c054fe83378c31836ac2c",
+        measurementId: "G-W2E82HC7WC"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <script src="welcome.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- JavaScript -->
+
+<script>
+
+    const music = document.querySelector("audio");
+    const img = document.querySelector("img");
+
+     // Array of object
+     let songs = [{
+        name : "Khalid_Better",
+        title : "Better",
+        artist: "Khalid" ,
+        na:"Khalid-Better-artwork"
+       
+    },
+    {
+        name : "Ozuna_Despeinada",
+        title : "Despeinada",
+        artist: "Ozuna, Camilo" ,
+        na:"artworks-W0Hs1JdeOBw7-0-t500x500"
+    },
+    {
+        name : "AP_Dhillon_Brown_Munde",
+        title : "Brown Munde",
+        artist:"AP Dhillon, Gurinder Gill, Gminxr, Shinda Kahlon",
+        na:"brown-munde"
+    },
+];
+
+    let isPlaying = false;
+
+    // for play function
+    const playMusic = () => {
+        isPlaying = true;
+        music.play(); 
+        play.classList.replace("fa-play", "fa-pause");
+        img.classList.add("anime");
+    }; 
+    
+
+    // for pause function
+  const pauseMusic = () => {
+        isPlaying = false;
+        music.pause(); 
+        play.classList.replace( "fa-pause", "fa-play");
+        img.classList.remove("anime");
+    };
+    
+
+play.addEventListener('click', () => {
+
+    isPlaying ? pauseMusic() : playMusic();
+});
+
+
+
+// changing the music data
+const loadSong = (songs) => {
+    title.textContent = songs.title;
+    artist.textContent = songs.artist;
+    music.src = songs.name + ".mp3";
+    img.src = songs.na+".jpg";
+};
+
+
+// NEXT
+const nextSong = () => {
+    songIndex = (songIndex + 1) % songs.length;
+    loadSong(songs[songIndex]);
+    playMusic();
+}
+songIndex = 0;
+
+// PREVIOUS
+const prevSong = () => {
+    songIndex = (songIndex - 1 + songs.length) % songs.length;
+    loadSong(songs[songIndex]);
+    playMusic();
+}
+
+
+next.addEventListener("click" , nextSong);
+prev.addEventListener("click" , prevSong);
+
+
+
+
+</script>
+<!-- <div class = "nav_bar"> -->
+
+</body>
+</html>

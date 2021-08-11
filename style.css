@@ -1,0 +1,139 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+html{
+    font-size: 62.5%;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    
+}
+
+.logout{
+    place-items: top;
+}
+
+.main_heading{
+font-size: large;
+font-style: normal;
+font-family:Georgia, 'Times New Roman', Times, serif;
+
+}
+
+
+.main_div {
+width: 100vw;
+height: 100vh;
+background-color: #f6f6f6;
+ display: grid;  /* is the phererolem */
+place-items:center;
+}
+
+.music_container  {
+width: 35rem;
+height: 51rem;
+background-color: #ffffff;
+border-radius: 2rem;
+box-shadow: 0 1.2rem 3rem 0.5rem rgba(206, 20, 223, 0.2);
+padding: 3rem;
+text-align: center;
+}
+
+
+.music_container #title  {
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    word-spacing: 0.5rem;
+    color: #171717;
+    margin: 2rem 0 0 0.5rem 0;
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-shadow: 0 0.3rem 0.5rem rgba(0,0, 0, 0.3);
+}
+
+
+
+.music_container #artist  {
+    text-transform: capitalize;
+    letter-spacing: 0.1rem;
+    color: #cccaca;
+    margin: 2rem 0 0 0.5rem 0;
+    font-size: 2.rem;
+    font-weight: 300;
+   
+}
+
+.img_container{
+width: 25rem;
+height: 25rem;
+margin: auto;
+}
+
+img{
+    /* make the img object fit and be the shape in circle */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 1.2rem 3rem 0.5rem rgba(206, 20, 223, 0.2);
+}
+
+
+.music_controls{
+width: 20rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin: auto;
+margin-top: 5rem;
+}
+
+
+.music_controls .fas{
+    font-size: 2rem;
+    cursor: pointer;
+    filter: drop-shadow(0 1.2rem 3rem 0.5rem rgba(0,0,0,0.4));
+}
+
+
+.music_controls .main_button{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: #111;
+    color: #f6f6f6;
+    /* add display flex ro centre the icons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+}
+
+
+
+.music_controls .fas:hover{
+    color: grey;
+}
+
+
+.music_controls .fa-play:hover{
+   background-color: #f6f6f6;
+   color: #111;
+   box-shadow: 0 1rem 2rem 0.2rem rgba(0,0, 0, 0.4);
+}
+
+/* using annimation using anime class */
+
+.anime{
+
+animation: rotatePlayer 3s linear infinite ;
+}
+
+@keyframes rotatePlayer{
+    from { transform: rotate(0deg); }
+    to{transform: rotate(360deg); }
+}
